@@ -15,7 +15,7 @@ namespace MiTubeModels
         public Guid VideoId { get; set; }
         public virtual Video Video { get; set; }
 
-        public string? Value { get; set; }
+        public String Value { get; set; }
         public Guid? ParentId { get; set; }
 
         [Timestamp]
