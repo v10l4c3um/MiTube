@@ -10,7 +10,5 @@ namespace MiTubeModels
 
         [Required]
         public String Description { get; set; }
-        
-        virtual public ICollection<User> Users { get; set; } // ???
     }
 }

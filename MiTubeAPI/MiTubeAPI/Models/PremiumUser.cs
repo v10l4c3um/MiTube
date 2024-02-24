@@ -5,14 +5,12 @@ namespace MiTubeModels
 {
     public class PremiumUser : Model
     {
-        [Required] //??
+        [Required]
         public Guid UserId { get; set; }
         virtual public User User { get; set; }
-        virtual public ICollection<User> Users { get; set; }
-        // ??
 
 
         [Required]
-        public String Description { get; set; } // ???
+        public DateTime Date { get; set; } // TODO DateOnly
     }
 }

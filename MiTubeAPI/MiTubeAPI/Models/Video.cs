@@ -16,11 +16,15 @@ namespace MiTubeModels
 
         public int Likecount { get; set; }
 
-        virtual public ICollection<Playlist> Playlists { get; set; }
+        [Required]
+        public String PosterUrl { get; set; }
+
+        [StringLength(1024)]
+        public String Description { get; set; }
+
         virtual public ICollection<Tag> Tags { get; set; }
         virtual public ICollection<Comment> Comments { get; set; }
         virtual public ICollection<Like> Likes { get; set; }
-        virtual public ICollection<Poster> Posters { get; set; }
 
     }
 }
