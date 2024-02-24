@@ -14,13 +14,13 @@ namespace MiTubeModels
 
         [Required, StringLength(64)]
         public String Name { get; set; }
+
         [Required]
         public String Email { get; set; }
 
         [Required]
         public String Password { get; set; }
 
-        virtual public ICollection<Comment> Comments { get; set; }
         virtual public ICollection<Like> Likes { get; set; }
     }
 }

@@ -15,14 +15,10 @@ namespace MiTubeModels
         public Guid VideoId { get; set; }
         public virtual Video Video { get; set; }
 
-
         public string? Value { get; set; }
         public Guid? ParentId { get; set; }
 
         [Timestamp]
         public DateTime Timestamp { get; set; }
-
-        public Guid? ReferenceUserId { get; set; }
-
     }
 }
