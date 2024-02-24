@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MiTubeAPI.Data;
 namespace MiTubeAPI
 {
     public class Program
@@ -5,6 +8,8 @@ namespace MiTubeAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<MiTubeAPIContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("MiTubeAPIContext") ?? throw new InvalidOperationException("Connection string 'MiTubeAPIContext' not found.")));
 
             // Add services to the container.
 
