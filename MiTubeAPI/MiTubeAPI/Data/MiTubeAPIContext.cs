@@ -17,5 +17,6 @@ namespace MiTubeAPI.Data
         public DbSet<MiTubeModels.User> User { get; set; } = default!;
 
         public DbSet<MiTubeModels.Video>? Video { get; set; }
+        public DbSet<MiTubeModels.Comment>? Comment { get; set; }
     }
 }
