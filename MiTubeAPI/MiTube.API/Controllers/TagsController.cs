@@ -5,62 +5,62 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MiTubeAPI.Data;
+using MiTube.API.Data;
 using MiTubeModels;
 
-namespace MiTubeAPI.Controllers
+namespace MiTube.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class VideosController : ControllerBase
+    public class TagsController : ControllerBase
     {
         private readonly MiTubeAPIContext _context;
 
-        public VideosController(MiTubeAPIContext context)
+        public TagsController(MiTubeAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Videos
+        // GET: api/Tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Video>>> GetVideo()
+        public async Task<ActionResult<IEnumerable<Tag>>> GetTag()
         {
-          if (_context.Video == null)
+          if (_context.Tag == null)
           {
               return NotFound();
           }
-            return await _context.Video.ToListAsync();
+            return await _context.Tag.ToListAsync();
         }
 
-        // GET: api/Videos/5
+        // GET: api/Tags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Video>> GetVideo(Guid id)
+        public async Task<ActionResult<Tag>> GetTag(Guid id)
         {
-          if (_context.Video == null)
+          if (_context.Tag == null)
           {
               return NotFound();
           }
-            var video = await _context.Video.FindAsync(id);
+            var tag = await _context.Tag.FindAsync(id);
 
-            if (video == null)
+            if (tag == null)
             {
                 return NotFound();
             }
 
-            return video;
+            return tag;
         }
 
-        // PUT: api/Videos/5
+        // PUT: api/Tags/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVideo(Guid id, Video video)
+        public async Task<IActionResult> PutTag(Guid id, Tag tag)
         {
-            if (id != video.Id)
+            if (id != tag.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(video).State = EntityState.Modified;
+            _context.Entry(tag).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace MiTubeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VideoExists(id))
+                if (!TagExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace MiTubeAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Videos
+        // POST: api/Tags
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Video>> PostVideo(Video video)
+        public async Task<ActionResult<Tag>> PostTag(Tag tag)
         {
-          if (_context.Video == null)
+          if (_context.Tag == null)
           {
-              return Problem("Entity set 'MiTubeAPIContext.Video'  is null.");
+              return Problem("Entity set 'MiTubeAPIContext.Tag'  is null.");
           }
-            _context.Video.Add(video);
+            _context.Tag.Add(tag);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVideo", new { id = video.Id }, video);
+            return CreatedAtAction("GetTag", new { id = tag.Id }, tag);
         }
 
-        // DELETE: api/Videos/5
+        // DELETE: api/Tags/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVideo(Guid id)
+        public async Task<IActionResult> DeleteTag(Guid id)
         {
-            if (_context.Video == null)
+            if (_context.Tag == null)
             {
                 return NotFound();
             }
-            var video = await _context.Video.FindAsync(id);
-            if (video == null)
+            var tag = await _context.Tag.FindAsync(id);
+            if (tag == null)
             {
                 return NotFound();
             }
 
-            _context.Video.Remove(video);
+            _context.Tag.Remove(tag);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool VideoExists(Guid id)
+        private bool TagExists(Guid id)
         {
-            return (_context.Video?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Tag?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

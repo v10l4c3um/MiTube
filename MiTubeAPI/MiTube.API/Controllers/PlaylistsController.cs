@@ -5,62 +5,62 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MiTubeAPI.Data;
+using MiTube.API.Data;
 using MiTubeModels;
 
-namespace MiTubeAPI.Controllers
+namespace MiTube.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class LikesController : ControllerBase
+    public class PlaylistsController : ControllerBase
     {
         private readonly MiTubeAPIContext _context;
 
-        public LikesController(MiTubeAPIContext context)
+        public PlaylistsController(MiTubeAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Likes
+        // GET: api/Playlists
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Like>>> GetLike()
+        public async Task<ActionResult<IEnumerable<Playlist>>> GetPlaylist()
         {
-          if (_context.Like == null)
+          if (_context.Playlist == null)
           {
               return NotFound();
           }
-            return await _context.Like.ToListAsync();
+            return await _context.Playlist.ToListAsync();
         }
 
-        // GET: api/Likes/5
+        // GET: api/Playlists/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Like>> GetLike(Guid id)
+        public async Task<ActionResult<Playlist>> GetPlaylist(Guid id)
         {
-          if (_context.Like == null)
+          if (_context.Playlist == null)
           {
               return NotFound();
           }
-            var like = await _context.Like.FindAsync(id);
+            var playlist = await _context.Playlist.FindAsync(id);
 
-            if (like == null)
+            if (playlist == null)
             {
                 return NotFound();
             }
 
-            return like;
+            return playlist;
         }
 
-        // PUT: api/Likes/5
+        // PUT: api/Playlists/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLike(Guid id, Like like)
+        public async Task<IActionResult> PutPlaylist(Guid id, Playlist playlist)
         {
-            if (id != like.Id)
+            if (id != playlist.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(like).State = EntityState.Modified;
+            _context.Entry(playlist).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace MiTubeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LikeExists(id))
+                if (!PlaylistExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace MiTubeAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Likes
+        // POST: api/Playlists
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Like>> PostLike(Like like)
+        public async Task<ActionResult<Playlist>> PostPlaylist(Playlist playlist)
         {
-          if (_context.Like == null)
+          if (_context.Playlist == null)
           {
-              return Problem("Entity set 'MiTubeAPIContext.Like'  is null.");
+              return Problem("Entity set 'MiTubeAPIContext.Playlist'  is null.");
           }
-            _context.Like.Add(like);
+            _context.Playlist.Add(playlist);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLike", new { id = like.Id }, like);
+            return CreatedAtAction("GetPlaylist", new { id = playlist.Id }, playlist);
         }
 
-        // DELETE: api/Likes/5
+        // DELETE: api/Playlists/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLike(Guid id)
+        public async Task<IActionResult> DeletePlaylist(Guid id)
         {
-            if (_context.Like == null)
+            if (_context.Playlist == null)
             {
                 return NotFound();
             }
-            var like = await _context.Like.FindAsync(id);
-            if (like == null)
+            var playlist = await _context.Playlist.FindAsync(id);
+            if (playlist == null)
             {
                 return NotFound();
             }
 
-            _context.Like.Remove(like);
+            _context.Playlist.Remove(playlist);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool LikeExists(Guid id)
+        private bool PlaylistExists(Guid id)
         {
-            return (_context.Like?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Playlist?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

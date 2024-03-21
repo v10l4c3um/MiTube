@@ -5,62 +5,62 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MiTubeAPI.Data;
+using MiTube.API.Data;
 using MiTubeModels;
 
-namespace MiTubeAPI.Controllers
+namespace MiTube.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class TagsController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly MiTubeAPIContext _context;
 
-        public TagsController(MiTubeAPIContext context)
+        public UsersController(MiTubeAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Tags
+        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tag>>> GetTag()
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-          if (_context.Tag == null)
+          if (_context.User == null)
           {
               return NotFound();
           }
-            return await _context.Tag.ToListAsync();
+            return await _context.User.ToListAsync();
         }
 
-        // GET: api/Tags/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tag>> GetTag(Guid id)
+        public async Task<ActionResult<User>> GetUser(Guid id)
         {
-          if (_context.Tag == null)
+          if (_context.User == null)
           {
               return NotFound();
           }
-            var tag = await _context.Tag.FindAsync(id);
+            var user = await _context.User.FindAsync(id);
 
-            if (tag == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return tag;
+            return user;
         }
 
-        // PUT: api/Tags/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(Guid id, Tag tag)
+        public async Task<IActionResult> PutUser(Guid id, User user)
         {
-            if (id != tag.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tag).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace MiTubeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TagExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace MiTubeAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Tags
+        // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Tag>> PostTag(Tag tag)
+        public async Task<ActionResult<User>> PostUser(User user)
         {
-          if (_context.Tag == null)
+          if (_context.User == null)
           {
-              return Problem("Entity set 'MiTubeAPIContext.Tag'  is null.");
+              return Problem("Entity set 'MiTubeAPIContext.User'  is null.");
           }
-            _context.Tag.Add(tag);
+            _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTag", new { id = tag.Id }, tag);
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Tags/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTag(Guid id)
+        public async Task<IActionResult> DeleteUser(Guid id)
         {
-            if (_context.Tag == null)
+            if (_context.User == null)
             {
                 return NotFound();
             }
-            var tag = await _context.Tag.FindAsync(id);
-            if (tag == null)
+            var user = await _context.User.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Tag.Remove(tag);
+            _context.User.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TagExists(Guid id)
+        private bool UserExists(Guid id)
         {
-            return (_context.Tag?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.User?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MiTubeModels;
 
-namespace MiTubeAPI.Data
+namespace MiTube.API.Data
 {
     public class MiTubeAPIContext : DbContext
     {

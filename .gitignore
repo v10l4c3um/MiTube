@@ -363,7 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # ConnectionStrings
-/MiTubeAPI/MiTubeAPI/appsettings.json
+/MiTubeAPI/MiTube.API/appsettings.json
 */appsettings.json
 
 # Migrations

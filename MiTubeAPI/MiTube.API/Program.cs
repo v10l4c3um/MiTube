@@ -1,8 +1,8 @@
 ﻿using Azure.Storage.Blobs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using MiTubeAPI.Data;
-namespace MiTubeAPI
+using MiTube.API.Data;
+namespace MiTube.API
 {
     public class Program
     {

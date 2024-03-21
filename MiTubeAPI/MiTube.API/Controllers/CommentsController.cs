@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MiTubeAPI.Data;
+using MiTube.API.Data;
 using MiTubeModels;
 
-namespace MiTubeAPI.Controllers
+namespace MiTube.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]

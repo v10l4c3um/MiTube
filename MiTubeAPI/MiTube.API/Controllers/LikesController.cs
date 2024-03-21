@@ -5,62 +5,62 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MiTubeAPI.Data;
+using MiTube.API.Data;
 using MiTubeModels;
 
-namespace MiTubeAPI.Controllers
+namespace MiTube.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class LikesController : ControllerBase
     {
         private readonly MiTubeAPIContext _context;
 
-        public UsersController(MiTubeAPIContext context)
+        public LikesController(MiTubeAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Likes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<Like>>> GetLike()
         {
-          if (_context.User == null)
+          if (_context.Like == null)
           {
               return NotFound();
           }
-            return await _context.User.ToListAsync();
+            return await _context.Like.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Likes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(Guid id)
+        public async Task<ActionResult<Like>> GetLike(Guid id)
         {
-          if (_context.User == null)
+          if (_context.Like == null)
           {
               return NotFound();
           }
-            var user = await _context.User.FindAsync(id);
+            var like = await _context.Like.FindAsync(id);
 
-            if (user == null)
+            if (like == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return like;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Likes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(Guid id, User user)
+        public async Task<IActionResult> PutLike(Guid id, Like like)
         {
-            if (id != user.Id)
+            if (id != like.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(like).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace MiTubeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!LikeExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace MiTubeAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Likes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Like>> PostLike(Like like)
         {
-          if (_context.User == null)
+          if (_context.Like == null)
           {
-              return Problem("Entity set 'MiTubeAPIContext.User'  is null.");
+              return Problem("Entity set 'MiTubeAPIContext.Like'  is null.");
           }
-            _context.User.Add(user);
+            _context.Like.Add(like);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetLike", new { id = like.Id }, like);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Likes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(Guid id)
+        public async Task<IActionResult> DeleteLike(Guid id)
         {
-            if (_context.User == null)
+            if (_context.Like == null)
             {
                 return NotFound();
             }
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var like = await _context.Like.FindAsync(id);
+            if (like == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
+            _context.Like.Remove(like);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserExists(Guid id)
+        private bool LikeExists(Guid id)
         {
-            return (_context.User?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Like?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

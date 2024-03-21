@@ -5,62 +5,62 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MiTubeAPI.Data;
+using MiTube.API.Data;
 using MiTubeModels;
 
-namespace MiTubeAPI.Controllers
+namespace MiTube.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class PlaylistsController : ControllerBase
+    public class VideosController : ControllerBase
     {
         private readonly MiTubeAPIContext _context;
 
-        public PlaylistsController(MiTubeAPIContext context)
+        public VideosController(MiTubeAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Playlists
+        // GET: api/Videos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Playlist>>> GetPlaylist()
+        public async Task<ActionResult<IEnumerable<Video>>> GetVideo()
         {
-          if (_context.Playlist == null)
+          if (_context.Video == null)
           {
               return NotFound();
           }
-            return await _context.Playlist.ToListAsync();
+            return await _context.Video.ToListAsync();
         }
 
-        // GET: api/Playlists/5
+        // GET: api/Videos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Playlist>> GetPlaylist(Guid id)
+        public async Task<ActionResult<Video>> GetVideo(Guid id)
         {
-          if (_context.Playlist == null)
+          if (_context.Video == null)
           {
               return NotFound();
           }
-            var playlist = await _context.Playlist.FindAsync(id);
+            var video = await _context.Video.FindAsync(id);
 
-            if (playlist == null)
+            if (video == null)
             {
                 return NotFound();
             }
 
-            return playlist;
+            return video;
         }
 
-        // PUT: api/Playlists/5
+        // PUT: api/Videos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPlaylist(Guid id, Playlist playlist)
+        public async Task<IActionResult> PutVideo(Guid id, Video video)
         {
-            if (id != playlist.Id)
+            if (id != video.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(playlist).State = EntityState.Modified;
+            _context.Entry(video).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace MiTubeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PlaylistExists(id))
+                if (!VideoExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace MiTubeAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Playlists
+        // POST: api/Videos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Playlist>> PostPlaylist(Playlist playlist)
+        public async Task<ActionResult<Video>> PostVideo(Video video)
         {
-          if (_context.Playlist == null)
+          if (_context.Video == null)
           {
-              return Problem("Entity set 'MiTubeAPIContext.Playlist'  is null.");
+              return Problem("Entity set 'MiTubeAPIContext.Video'  is null.");
           }
-            _context.Playlist.Add(playlist);
+            _context.Video.Add(video);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPlaylist", new { id = playlist.Id }, playlist);
+            return CreatedAtAction("GetVideo", new { id = video.Id }, video);
         }
 
-        // DELETE: api/Playlists/5
+        // DELETE: api/Videos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePlaylist(Guid id)
+        public async Task<IActionResult> DeleteVideo(Guid id)
         {
-            if (_context.Playlist == null)
+            if (_context.Video == null)
             {
                 return NotFound();
             }
-            var playlist = await _context.Playlist.FindAsync(id);
-            if (playlist == null)
+            var video = await _context.Video.FindAsync(id);
+            if (video == null)
             {
                 return NotFound();
             }
 
-            _context.Playlist.Remove(playlist);
+            _context.Video.Remove(video);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PlaylistExists(Guid id)
+        private bool VideoExists(Guid id)
         {
-            return (_context.Playlist?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Video?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

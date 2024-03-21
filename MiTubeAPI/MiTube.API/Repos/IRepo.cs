@@ -1,4 +1,4 @@
-﻿namespace MiTubeAPI.Repos
+﻿namespace MiTube.API.Repos
 {
     public interface IRepo<T>
     {
