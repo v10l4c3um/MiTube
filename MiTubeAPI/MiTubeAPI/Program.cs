@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Storage.Blobs;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MiTubeAPI.Data;
 namespace MiTubeAPI
@@ -17,6 +18,31 @@ namespace MiTubeAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+
+
+
+            //add connectin to Azure Blob
+            //builder.Services.AddSingleton(provider => {
+            //    IConfigurationRoot configuration = new ConfigurationBuilder().
+            //    AddJsonFile("appsettings.json").
+            //    Build();
+            //    return configuration;
+            //});
+
+            IConfigurationRoot configuration = new ConfigurationBuilder().
+                AddJsonFile("appsettings.json").
+                Build();
+
+            string connectionString = configuration["StorageConnectionString"];
+
+            builder.Services.AddSingleton(provider => {
+                BlobServiceClient serviceClient = new BlobServiceClient(connectionString);
+                return serviceClient;
+            });
+
+
+
 
             var app = builder.Build();
 

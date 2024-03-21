@@ -6,7 +6,9 @@ namespace MiTubeModels
     public class Subscription : Model
     {
         [Required]
-        public Guid UserId { get; set; }
-        virtual public User User { get; set; }
+        public Guid SubscriberId { get; set; }
+        public Guid PublisherId { get; set; }
+        virtual public User Subscriber { get; set; }
+        virtual public User Publisher { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace MiTubeModels
         [Required]
         [ForeignKey("FK_UserType_Id")]
         public int UserTypeId { get; set; }
-        virtual public UserType UserType { get; set; }
+        
 
         [Required, StringLength(64)]
         public String Name { get; set; }
@@ -22,7 +22,11 @@ namespace MiTubeModels
 
         [Required]
         public String Password { get; set; }
+        
+        //properties navigation
+        public virtual UserType? UserType { get; set; }
 
-        virtual public ICollection<Like> Likes { get; set; }
+        public virtual ICollection<Like>? Likes { get; set; }
+        public virtual ICollection<Subscription>? Subscriptions { get; set; }
     }
 }

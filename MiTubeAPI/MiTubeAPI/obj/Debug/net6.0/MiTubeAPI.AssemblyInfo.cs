@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MiTubeAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c43987602237901dca914ff60dab9da6fe73568e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b885d13d64d7a23b5909f7d4558b12a97cee7d0d")]
 [assembly: System.Reflection.AssemblyProductAttribute("MiTubeAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MiTubeAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

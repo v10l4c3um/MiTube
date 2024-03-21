@@ -368,3 +368,6 @@ FodyWeavers.xsd
 
 # Migrations
 Migrations/
+
+#obj folder (debug process)
+*/obj

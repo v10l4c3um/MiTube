@@ -10,7 +10,7 @@ using MiTubeModels;
 
 namespace MiTubeAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class TagsController : ControllerBase
     {
